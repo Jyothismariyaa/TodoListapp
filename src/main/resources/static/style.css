@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* === Global Reset and Base Styles === */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #e9ecef; /* Light gray/blue background */
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    min-height: 100vh;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 700px; /* Slightly wider for better table view */
+}
+
+/* === App Container === */
+.todo-app {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+    color: #343a40; /* Dark text */
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 15px;
+    font-size: 28px;
+}
+
+/* === Input Row and Button === */
+.task-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+#input-box {
+    flex: 1;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#input-box:focus {
+    border-color: #007bff; /* Primary color focus */
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.add-btn {
+    border: none;
+    padding: 12px 25px;
+    background: #007bff; /* Primary button color */
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+
+.add-btn:hover {
+    background: #0056b3;
+}
+
+/* === Table Header (Simulated) === */
+.list-header {
+    display: flex;
+    font-weight: 600;
+    color: #495057;
+    padding: 10px 0;
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Define column widths */
+.list-header .col-status { width: 80px; text-align: center; }
+.list-header .col-task   { flex-grow: 1; }
+.list-header .col-action { width: 80px; text-align: center; }
+
+/* === List Item Styling (The "Rows") === */
+#list-container {
+    list-style: none;
+    padding: 0;
+}
+
+#list-container li {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 15px 0;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #f8f9fa;
+    transition: background 0.3s;
+}
+
+#list-container li:hover {
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Create the Toggle Checkbox Area */
+#list-container li::before {
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    border: 2px solid #adb5bd; /* Gray border */
+    transition: all 0.2s;
+    margin: 0 30px;
+    flex-shrink: 0;
+    /* Move 'before' element to simulate status column */
+    order: -1; 
+}
+
+/* Task Name */
+#list-container li span:first-child { 
+    flex-grow: 1; 
+    margin-right: 15px;
+}
+
+/* === Checked/Completed State === */
+#list-container li.checked {
+    color: #adb5bd; /* Muted text */
+    text-decoration: line-through;
+}
+
+#list-container li.checked::before {
+    background-color: #28a745; /* Green for completion */
+    border-color: #28a745;
+    /* White checkmark */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* === Delete Button (X) styling === */
+#list-container li span {
+    /* Repurpose the span for the delete column */
+    position: static; 
+    width: 80px; 
+    height: auto;
+    font-size: 20px;
+    color: #dc3545; /* Red delete icon */
+    line-height: 1; 
+    text-align: center;
+    border-radius: 0; 
+    transition: color 0.3s;
+    flex-shrink: 0;
+    
+    /* Make the X button look better */
+    font-weight: 500;
+}
+
+#list-container li span:hover {
+    background: transparent;
+    color: #a71d2a;
+}
